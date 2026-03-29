@@ -99,4 +99,3 @@ The project follows a modular structure to separate concerns:
 * `tests/`: Automated test suite.
 
 ![Clean Project Directory Structure](./images/folder_structure.png)
-
