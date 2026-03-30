@@ -43,6 +43,22 @@ Data transformation is performed using pandas to ensure integrity and consistenc
 ### Load
 The loading phase uses SQLAlchemy to manage database connections and bulk-insert the cleaned DataFrame into a PostgreSQL orders table, **ensuring schema consistency and reproducibility.**
 
+## Example Data (Raw vs Cleaned)
+
+Below is an example of the inconsistent raw data handled by the pipeline:
+
+| order_id | product | category (dirty) | price (dirty) |
+| :--- | :--- | :--- | :--- |
+| ORD-101 | Laptop Stand | tech | $29.99 |
+| ORD-102 | USB-C Hub | Electronics | 45.00 |
+| ORD-103 | Wireless Mouse | electronics | $ 15.50 |
+
+**What the pipeline fixes:**
+- **Normalization**: Maps "tech" and "electronics" (lowercase) to a standard "electronics" category.
+- **Price Cleaning**: Strips currency symbols ($) and whitespace, converting values to a standard numeric format for calculation.
+- **Consistency**: Ensures all date and string formats are uniform across the entire dataset.
+
+
 ## Example Pipeline Run
 
 The pipeline provides structured logging to show how raw data is progressively cleaned and refined at each step.
@@ -78,6 +94,29 @@ The project uses Docker Compose to orchestrate the environment, allowing for one
 
 ![Docker Container Status](./images/docker_ps.png)
 
+## How to Run the Project
+
+Follow these steps to set up and run the ETL pipeline locally:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/fahad-codes01/E-commerce-Sales-Data-Pipeline.git
+   cd E-commerce-Sales-Data-Pipeline
+   ```
+
+2. **Configure Environment:**
+   - Copy `.env.example` to `.env`.
+   - Fill in your database credentials in the `.env` file (default values are optimized for Docker).
+
+3. **Deploy with Docker:**
+   ```bash
+   docker compose up --build
+   ```
+
+4. **Automated Execution:**
+   The pipeline will execute automatically once the containers are healthy, extracting the raw CSV, cleaning the data, and loading it into the PostgreSQL instance.
+
+
 ## Example Analytics Queries
 
 Once the data is loaded into PostgreSQL, it can be queried to provide business insights:
@@ -99,3 +138,13 @@ The project follows a modular structure to separate concerns:
 * `tests/`: Automated test suite.
 
 ![Clean Project Directory Structure](./images/folder_structure.png)
+
+## Future Improvements
+
+* **Workflow Orchestration**: Add workflow scheduling and monitoring with Apache Airflow.
+* **Cloud Migration**: Migrate data storage to cloud-native solutions (e.g., AWS S3 + Redshift or Google BigQuery).
+* **Incremental Loading**: Implement Change Data Capture (CDC) or incremental loading instead of full batch loads.
+* **dbt Integration**: Add a dedicated data transformation layer with dbt for more complex modeling.
+
+> [!NOTE]
+> **Terminal & Environment Tip:** หากคุณใช้ Windows และพบปัญหาเรื่อง Permission ใน PowerShell (เช่นการรันสคริปต์ .ps1) ให้ลองเปลี่ยนไปใช้ **Git Bash** หรือ **WSL2** จะช่วยให้รันคำสั่งต่างๆ ได้ลื่นไหลเหมือนระบบ Unix มากขึ้นครับ ส่วนปัญหาเรื่อง Path ให้ตรวจสอบว่าได้ติดตั้ง Python และ Docker ลงใน System PATH เรียบร้อยแล้ว
