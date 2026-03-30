@@ -147,4 +147,4 @@ The project follows a modular structure to separate concerns:
 * **dbt Integration**: Add a dedicated data transformation layer with dbt for more complex modeling.
 
 > [!NOTE]
-> **Terminal & Environment Tip:** หากคุณใช้ Windows และพบปัญหาเรื่อง Permission ใน PowerShell (เช่นการรันสคริปต์ .ps1) ให้ลองเปลี่ยนไปใช้ **Git Bash** หรือ **WSL2** จะช่วยให้รันคำสั่งต่างๆ ได้ลื่นไหลเหมือนระบบ Unix มากขึ้นครับ ส่วนปัญหาเรื่อง Path ให้ตรวจสอบว่าได้ติดตั้ง Python และ Docker ลงใน System PATH เรียบร้อยแล้ว
+> **Terminal & Environment Tip:** If you are on Windows and encounter permission issues in PowerShell (e.g. unable to run .ps1 scripts), consider switching to **Git Bash** or **WSL2** for a smoother Unix-like experience. For PATH-related issues, ensure that Python and Docker are properly added to your System PATH.
