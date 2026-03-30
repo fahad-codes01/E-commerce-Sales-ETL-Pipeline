@@ -100,8 +100,8 @@ Follow these steps to set up and run the ETL pipeline locally:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/fahad-codes01/E-commerce-Sales-Data-Pipeline.git
-   cd E-commerce-Sales-Data-Pipeline
+   git clone https://github.com/fahad-codes01/E-commerce-Sales-ETL-Pipeline.git
+   cd E-commerce-Sales-ETL-Pipeline
    ```
 
 2. **Configure Environment:**
